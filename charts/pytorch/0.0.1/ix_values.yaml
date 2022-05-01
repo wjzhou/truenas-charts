@@ -1,0 +1,29 @@
+replicaCount: 1
+
+image:
+  repository: nvcr.io/nvidia/pytorch
+  pullPolicy: IfNotPresent
+  tag: 22.04-py3
+
+securityContext:
+  readOnlyRootFilesystem: false
+  runAsNonRoot: false
+
+podSecurityContext:
+  runAsUser: 0
+  runAsGroup: 0
+
+service:
+  main:
+    ports:
+      main:
+        port: 8888
+        targetPort: 8888
+
+persistence:
+  config:
+    enabled: true
+    mountPath: "/root/.jupyter"
+  output:
+    enabled: true
+    mountPath: "/workspace"
